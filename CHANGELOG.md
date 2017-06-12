@@ -1,4 +1,17 @@
-# 0.10.1/ 2016-01-04
+# 0.12.1 / 2017-06-05
+
+* add no_host_uuid option (thanks @potato20!)
+
+# 0.12.0 / 2017-03-22
+
+* update for 0.5.5 (thanks @dbresson!)
+
+# 0.11.0 / 2017-02-23
+
+* update to 0.5.4 (thanks @erkki!)
+* add create_from_vault option (thanks @dbresson!)
+
+# 0.10.1/ 2017-01-04
 
 * fix private data leak in nomad config files (thanks @evan2645!)
 

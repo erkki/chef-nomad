@@ -88,6 +88,7 @@ nomad\_client\_config
 |network_interface|String|
 |network_speed|Integer|
 |max_kill_timeout|String|
+|no_host_uuid|[TrueClass, FalseClass]|
 |reserved|Hash|
 
 nomad\_atlas\_config
@@ -128,6 +129,7 @@ nomad\_vault\_config
 |address|String|
 |allow_unauthenticated|[TrueClass, FalseClass]|
 |enabled|[TrueClass, FalseClass]|
+|create_from_role|String|
 |task_token_ttl|String|
 |ca_file|String|
 |ca_path|String|

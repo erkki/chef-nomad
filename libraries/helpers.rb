@@ -45,8 +45,8 @@ module Nomad
   module Config
     OPTIONS ||= {
       # General Options
-      addresses: Nomad::Helpers.conf_keys_include_opts(%w( http rpc serf )),
-      advertise: Nomad::Helpers.conf_keys_include_opts(%w( http rpc serf )),
+      addresses: Nomad::Helpers.conf_keys_include_opts(%w(http rpc serf)),
+      advertise: Nomad::Helpers.conf_keys_include_opts(%w(http rpc serf)),
       bind_addr: { kind_of: String },
       datacenter: { kind_of: String },
       data_dir: { kind_of: String },
@@ -57,8 +57,8 @@ module Nomad
       http_api_response_headers: { kind_of: Hash },
       leave_on_interrupt: { kind_of: [TrueClass, FalseClass] },
       leave_on_terminate: { kind_of: [TrueClass, FalseClass] },
-      log_level: { kind_of: String, equal_to: %w( WARN INFO DEBUG ) },
-      ports: Nomad::Helpers.conf_keys_include_opts(%w( http rpc serf )),
+      log_level: { kind_of: String, equal_to: %w(WARN INFO DEBUG) },
+      ports: Nomad::Helpers.conf_keys_include_opts(%w(http rpc serf)),
       region: { kind_of: String },
       syslog_facility: { kind_of: String },
       # Sub-configuration
@@ -94,13 +94,15 @@ module Nomad
           end
         }
       },
+      no_host_uuid: { kind_of: [TrueClass, FalseClass] },
       meta: { kind_of: Hash },
       network_interface: { kind_of: String },
       network_speed: { kind_of: Integer },
+      cpu_total_compute: { kind_of: Integer },
       node_class: { kind_of: String },
       options: { kind_of: Hash },
       reserved: Nomad::Helpers.conf_keys_include_opts(
-        %w( cpu memory disk reserved_ports )
+        %w(cpu memory disk reserved_ports)
       ),
       servers: { kind_of: Array },
       state_dir: { kind_of: String }
@@ -146,6 +148,22 @@ module Nomad
           end
         }
       },
+      job_gc_threshold: {
+        kind_of: String,
+        callbacks: {
+          'is a valid time expression' => lambda do |spec|
+            spec.match(/^\d+(ns|us|µs|ms|s|m|h)$/)
+          end
+        }
+      },
+      eval_gc_threshold: {
+        kind_of: String,
+        callbacks: {
+          'is a valid time expression' => lambda do |spec|
+            spec.match(/^\d+(ns|us|µs|ms|s|m|h)$/)
+          end
+        }
+      },
       num_schedulers: {
         kind_of: Integer,
         callbacks: {
@@ -166,6 +184,7 @@ module Nomad
       address: { kind_of: String },
       allow_unauthenticated: { kind_of: [TrueClass, FalseClass] },
       enabled: { kind_of: [TrueClass, FalseClass] },
+      create_from_role: { kind_of: String },
       task_token_ttl: { kind_of: String },
       ca_file: { kind_of: String },
       ca_path: { kind_of: String },
